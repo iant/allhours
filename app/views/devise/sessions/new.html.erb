@@ -1,0 +1,30 @@
+<div class="col-md-4 col-md-offset-4">
+  <div class="panel panel-primary panel-login">
+    <div class="panel-heading">Login</div>
+    <div class="panel-body">
+
+    <%= form_for(resource, :html => {:role => "form"}, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, :autofocus => true, :class => "form-control", :email => "Login", :placeholder => "Email" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "Password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? -%>
+      <div class="field">
+        <%= f.check_box :remember_me, :value => 1 %>
+        <%= f.label :remember_me %>
+      </div>
+      <% end -%>
+
+      <div class="actions">
+        <%= f.submit "Log in", :class => "btn btn-default pull-right" %>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

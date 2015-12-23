@@ -1,9 +1,20 @@
 Rails.application.routes.draw do
+  resources :hours
+  get 'welcome/index'
+
+  # Devise and change the default sign_in route
+  devise_for :users, :skip => [:sessions]
+  as :user do
+    get 'login' => 'devise/sessions#new', :as => :new_user_session
+    post 'signin' => 'devise/sessions#create', :as => :user_session
+    delete 'signout' => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

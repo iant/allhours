@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  client: MyString
+  project: MyString
+  date: 2015-12-22
+  hours: 1.5
+
+two:
+  user_id: 1
+  client: MyString
+  project: MyString
+  date: 2015-12-22
+  hours: 1.5

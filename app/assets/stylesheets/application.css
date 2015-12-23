@@ -13,3 +13,169 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+  padding-top: 70px;
+  padding-bottom: 20px;
+  background-color: #f0f0f0  !important;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Cookie);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900);
+.cookie {
+  font-family: Cookie;
+  font-size: 90px !important;
+  color: #fff;
+  text-shadow: 1px 1px #000000;   
+}
+
+.form-inline {
+  padding-bottom:20px !important;
+}
+.form-inline > .form-group {
+  padding-right:3px !important;
+  padding-bottom:3px !important;
+
+}
+.btn-xs {
+  margin-right:3px !important;
+  margin-top:2px !important;
+
+}
+
+.alert.alert-success {
+  background-color: #4caf50;
+  color: rgba(255,255,255, 0.84);
+}
+.alert.alert-success a,
+.alert.alert-success .alert-link {
+  color: rgba(255,255,255, 0.84);
+}
+
+
+.message {
+  margin:0px 3px !important;
+}
+
+.table {
+  border-radius: 2px;
+  border: 0;
+  -webkit-box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+          box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+}
+
+.panel {
+  border-radius: 2px;
+  border: 0;
+  -webkit-box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+          box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+}
+
+
+.navbar,
+.navbar.navbar-default {
+  background-color: #009688;
+  color: rgba(255,255,255, 0.84) !important;
+  -webkit-box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+          box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+
+}
+
+.navbar-default .navbar-brand {
+  color: rgba(255,255,255, 0.84) !important;
+}  
+
+
+.navbar-default .navbar-text {
+  color: rgba(255,255,255, 0.84) !important;
+}  
+
+.navbar-default .navbar-text > a {
+  color: rgba(255,255,255, 0.84) !important;
+}  
+
+.navbar-brand
+{ 
+font-family: Cookie !important;
+font-size: 34px !important;
+color: #fff !important;  
+}  
+
+
+.panel > .panel-heading,
+.panel.panel-default > .panel-heading {
+  background-color: #eeeeee;
+}
+.panel.panel-inverse > .panel-heading {
+  background-color: #3f51b5;
+}
+.panel.panel-primary > .panel-heading {
+  background-color: #009688;
+}
+.panel.panel-success > .panel-heading {
+  background-color: #4caf50;
+}
+.panel.panel-info > .panel-heading {
+  background-color: #03a9f4;
+}
+.panel.panel-warning > .panel-heading {
+  background-color: #ff5722;
+}
+.panel.panel-danger > .panel-heading {
+  background-color: #f44336;
+}
+[class*="panel-"] > .panel-heading {
+  color: rgba(255,255,255, 0.84);
+  border: 0;
+}
+.panel-default > .panel-heading,
+.panel:not([class*="panel-"]) > .panel-heading {
+  color: rgba(0,0,0, 0.87);
+}
+.panel-footer {
+  background-color: #eeeeee;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #000;
+}
+
+div.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  width: 180px;                  
+  height: 20px;                 
+  padding: 2px;             
+  font: 11px sans-serif;        
+  background: black;
+  color: white;
+  border: 0px;      
+  border-radius: 2px;  
+  pointer-events: none;        
+  -webkit-box-shadow: 4px 4px 3px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    4px 4px 3px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         4px 4px 3px 0px rgba(50, 50, 50, 0.75);
+}
+
+path { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+
