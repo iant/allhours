@@ -16,6 +16,7 @@ class HoursController < ApplicationController
 
   def create
     @hour = Hour.new(hour_params)
+
     @hour.user_id = current_user.id
     if @hour.save
       render json: @hour
@@ -34,7 +35,7 @@ class HoursController < ApplicationController
   end
 
   def destroy
-    @hour = current_user.hours.find(params[:id])
+    @hour = current_user.hours.find(params[:id])    
     @hour.destroy
     head :no_content
   end

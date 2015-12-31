@@ -58,3 +58,4 @@ gem 'rails_12factor', group: :production
 
 # Specify Ruby version for Heroku
 ruby "2.2.3"
+

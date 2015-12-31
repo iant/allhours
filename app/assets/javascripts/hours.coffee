@@ -489,7 +489,7 @@
         tooltip.transition()
         .duration(200)
         .style("opacity", .9)        
-        tooltip.html(moment(d.date).format('DD/MM/YYYY') + " - " + d.client + " - " + d.hours )
+        tooltip.html(moment(d.date).format('DD/MM/YYYY') + " - " + d.client + " - " + d.project + " - " + d.hours )
         .style("left", (d3.event.pageX - 10) + "px")
         .style("top", (d3.event.pageY - 60) + "px")
       .on 'mouseout', (d) ->
