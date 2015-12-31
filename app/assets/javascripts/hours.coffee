@@ -2,9 +2,14 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+# Helper method for date validation
+@dateFormatValid = (date) ->
+  moment(date, 'DD/MM/YYYY', true).isValid()        
+
+# Main Hours React Component  
 @Hours = React.createClass
   getInitialState: ->               # Generate the initial state of our component
-    hours: @props.data            # to use sent Records data.
+    hours: @props.data              # to use sent Records data.
   getDefaultProps: ->               # Initialize component properties in case no data is sent when instantiating it.
     hours: []
   addHour: (hour) ->
@@ -19,7 +24,16 @@
     hours = React.addons.update(@state.hours, { $splice: [[index, 1, data]] })
     @replaceState hours: hours
   render: ->
-    React.DOM.div null,
+    React.DOM.div null, 
+      # Render .csv download button 
+      React.DOM.a
+        className: 'btn btn-default btn-xs pull-right'
+        href: '../hours.csv'
+        title: 'Download as a .csv file'
+        React.DOM.span
+          className: 'glyphicon glyphicon-download-alt'
+          'aria-hidden': 'true'
+        ' .csv'
       React.createElement HourForm, handleNewHour: @addHour
       React.DOM.table 
         className: 'table table-bordered'
@@ -37,9 +51,17 @@
   getInitialState: ->
     edit: false
     client: @props.hour.client
+    clientformclass: ''
+    clientformicon: ''
     project: @props.hour.project
-    date: @props.hour.date
+    projectformclass: ''
+    projectformicon: ''
+    date: moment(@props.hour.date).format('DD/MM/YYYY')
+    dateformclass: ''
+    dateformicon: ''
     hours: @props.hour.hours
+    hoursformclass: ''
+    hoursformicon: ''
   handleToggle: (e) ->
     e.preventDefault()
     @setState edit: !@state.edit
@@ -73,9 +95,10 @@
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
+
   valid: ->
-    @state.client && @state.project && @state.date && @state.hours
-    #dateFormatValid(@state.date)     
+    @state.client && @state.project && dateFormatValid(@state.date) && @state.hours
+         
   recordForm: ->
     React.DOM.tr null,
       React.DOM.td null,
@@ -85,7 +108,8 @@
           defaultValue: @props.hour.client
           ref: 'client'
           name: 'client'
-          onChange: @handleChange                    
+          onChange: @handleChange 
+
       React.DOM.td null,
         React.DOM.input
           className: 'form-control input-sm'
@@ -99,7 +123,7 @@
         React.DOM.input
           className: 'form-control input-sm'
           type: 'text'
-          defaultValue: @props.hour.date
+          defaultValue: moment(@props.hour.date).format('DD/MM/YYYY')
           #defaultValue: @state.date
           ref: 'date'
           name: 'date'
@@ -118,7 +142,7 @@
         React.DOM.a
           className: 'btn btn-success btn-xs'
           onClick: @handleEdit
-          #disabled: !@valid()
+          disabled: !@valid()
           'Update'
         React.DOM.a
           className: 'btn btn-warning btn-xs'
@@ -128,7 +152,7 @@
     React.DOM.tr null,
       React.DOM.td null, @props.hour.client 
       React.DOM.td null, @props.hour.project
-      React.DOM.td null, @props.hour.date
+      React.DOM.td null, moment(@props.hour.date).format('DD/MM/YYYY')
       React.DOM.td null, @props.hour.hours      
       React.DOM.td null,
         React.DOM.a
@@ -148,21 +172,51 @@
 @HourForm = React.createClass
   getInitialState: ->
     client: ''
+    clientformclass: 'form-group has-feedback'    
+    clientformicon: 'form-control-feedback'  
     project: ''
+    projectformclass: 'form-group has-feedback'    
+    projectformicon: 'form-control-feedback'      
     date: ''
+    dateformclass: 'form-group has-feedback'    
+    dateformicon: 'form-control-feedback'      
     hours: ''
+    hoursformclass: 'form-group has-feedback'    
+    hoursformicon: 'form-control-feedback'  
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
+  handleStringChange: (e) ->
+    name = e.target.name
+    value = e.target.value
+    @setState "#{ name }": value
+    if value
+      @setState "#{ name }formclass": 'form-group has-success has-feedback' 
+      @setState "#{ name }formicon": 'form-control-feedback glyphicon glyphicon-ok'
+    else
+      @setState "#{ name }formclass": 'form-group has-feedback' 
+      @setState "#{ name }formicon": 'form-control-feedback glyphicon'
+  handleDateChange: (e) ->
+    name = e.target.name
+    value = e.target.value
+    @setState "#{ name }": value
+    if dateFormatValid(value)
+      @setState "#{ name }formclass": 'form-group has-success has-feedback' 
+      @setState "#{ name }formicon": 'form-control-feedback glyphicon glyphicon-ok'
+    else
+      @setState "#{ name }formclass": 'form-group has-feedback' 
+      @setState "#{ name }formicon": 'form-control-feedback glyphicon'
+
+
   valid: ->  
-    @state.client && @state.project && @state.date && @state.hours
+    @state.client && @state.project && dateFormatValid(@state.date) && @state.hours
   handleSubmit: (e) ->
     e.preventDefault()
     $.post '../hours/', { hour: @state }, (data) =>
       @props.handleNewHour data
       @setState @getInitialState()
     , 'JSON'
-    # Pause for data write to catch up 
+    # Pause for data write to catch up before updating chart 
     setTimeout (->
       updateChart()
       return
@@ -172,7 +226,7 @@
       className: 'form-inline'
       onSubmit: @handleSubmit
       React.DOM.div
-        className: 'form-group has-success has-feedback'
+        className: @state.clientformclass 
         React.DOM.input
           type: 'text'
           className: 'form-control'
@@ -180,17 +234,17 @@
           name: 'client'
           value: @state.client
           onChange: @handleChange
-          #onInput: @handleClientChange          
+          onInput: @handleStringChange          
           'aria-describedby': 'inputclientstatus'
         React.DOM.span
-          className: 'glyphicon glyphicon-ok form-control-feedback'
+          className: @state.clientformicon # 'glyphicon glyphicon-ok form-control-feedback'
           'aria-hidden': 'true'
         React.DOM.span
           id: 'inputclientstatus' 
           className: 'sr-only'
           '(success)'
       React.DOM.div
-        className: 'form-group has-success has-feedback'
+        className: @state.projectformclass
         React.DOM.input
           type: 'text'
           className: 'form-control'
@@ -198,43 +252,46 @@
           name: 'project'
           value: @state.project
           onChange: @handleChange
+          onInput: @handleStringChange                    
           'aria-describedby': 'inputprojectstatus'
         React.DOM.span
-          className: 'glyphicon glyphicon-ok form-control-feedback'
+          className: @state.projectformicon
           'aria-hidden': 'true'
         React.DOM.span
           id: 'inputprojectstatus' 
           className: 'sr-only'
           '(success)'
       React.DOM.div
-        className: 'form-group has-success has-feedback'
+        className: @state.dateformclass
         React.DOM.input
           type: 'text'
           className: 'form-control'
-          placeholder: 'Date'
+          placeholder: 'Date (dd/mm/yyyy)'
           name: 'date'
           value: @state.date
           onChange: @handleChange
-          'aria-describedby': 'inputprojectstatus'
+          onInput: @handleDateChange                              
+          'aria-describedby': 'inputdatestatus'
         React.DOM.span
-          className: 'glyphicon glyphicon-ok form-control-feedback'
+          className: @state.dateformicon
           'aria-hidden': 'true'
         React.DOM.span
-          id: 'inputprojectstatus' 
+          id: 'inputdatestatus' 
           className: 'sr-only'
           '(success)'          
       React.DOM.div
-        className: 'form-group has-success has-feedback'
+        className: @state.hoursformclass
         React.DOM.input
-          type: 'numeric'
+          type: 'number'
           className: 'form-control'
           placeholder: 'Hours'
           name: 'hours'
           value: @state.hours
           onChange: @handleChange
+          onInput: @handleStringChange                                        
           'aria-describedby': 'inputprojectstatus'
         React.DOM.span
-          className: 'glyphicon glyphicon-ok form-control-feedback'
+          className: @state.hoursformicon
           'aria-hidden': 'true'
         React.DOM.span
           id: 'inputprojectstatus' 

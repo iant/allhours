@@ -5,7 +5,13 @@ class HoursController < ApplicationController
     respond_to do |format|
       format.html
       format.json
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"hours.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
     end    
+
+
   end
 
   def create

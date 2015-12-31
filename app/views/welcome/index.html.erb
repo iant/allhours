@@ -14,7 +14,7 @@
     <div class="panel panel-primary">
       <div class="panel-heading">Chart</div>
       <div class="panel-body">
-        <button onclick='updateChart()' class="btn btn-xs btn-default pull-right">
+        <button onclick='updateChart()' class="btn btn-xs btn-default pull-right" title="Refresh Chart">
           <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
         </button>
         <div id="chart"></div>
@@ -23,8 +23,11 @@
   </div>
   <div class="col-md-6">
     <div class="panel panel-primary">
-      <div class="panel-heading">Hours</div>
+      <div class="panel-heading">
+        Hours 
+      </div>
       <div class="panel-body">
+
         <%= react_component 'Hours', { data: @hours } %>
       </div>
     </div>  

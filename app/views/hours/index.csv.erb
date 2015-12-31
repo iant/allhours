@@ -1,0 +1,6 @@
+<%- headers = ['Client', 'Project', 'Date', 'Hours'] -%>
+  <%= CSV.generate_line headers, :row_sep => " " %>
+<%- @hours.each do |hour| -%>
+    <%= CSV.generate_line([hour.client, hour.project, hour.date, hour.hours], :row_sep => " ") %>
+<%- end -%>
+  
