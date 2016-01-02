@@ -1,4 +1,4 @@
 == README
 
-This is a demo app that uses the Ruby on Rails (http://rubyonrails.org) web framework as a backend, a PostgreSQL (http://www.postgresql.org) database, React.js (https://facebook.github.io/react/) for data entry UI (Hours), and D3.js (http://d3js.org) for data visualisations (Chart panel).
+This is a demo Time Tracking app that uses the Ruby on Rails (http://rubyonrails.org) web framework as a backend, a PostgreSQL (http://www.postgresql.org) database, React.js (https://facebook.github.io/react/) for data entry UI (Hours), and D3.js (http://d3js.org) for data visualisations (Chart panel).
 
