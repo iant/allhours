@@ -2,6 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+# Based in part on https://goo.gl/aCWqT1 [airpair.com]
+
 # Helper method for date validation
 @dateFormatValid = (date) ->
   moment(date, 'DD/MM/YYYY', true).isValid()        
@@ -224,6 +226,8 @@
   render: ->
     React.DOM.form
       className: 'form-inline'
+      id: 'hours-form'
+      name: 'hours-form'
       onSubmit: @handleSubmit
       React.DOM.div
         className: @state.clientformclass 

@@ -34,7 +34,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  # Use Rspec & Capybara testing framework
+  gem 'rspec-rails', '~> 3.0'
+  gem 'capybara', '~> 2.4.0'
+  #gem 'capybara-webkit'
 end
+
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
